@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\Apicontroller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/login', [Apicontroller::class, 'login']);
+Route::prefix('absen')->group(function () {
+    Route::get('/', [Apicontroller::class, 'absen']);
+    Route::post('/masuk', [Apicontroller::class, 'absenMasuk']);
+    Route::post('/pulang', [Apicontroller::class, 'absenPulang']);
 });
